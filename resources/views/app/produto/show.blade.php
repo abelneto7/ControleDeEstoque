@@ -11,7 +11,6 @@
         <div class="menu">
             <ul>
                 <li><a href="{{ route('produto.index') }}">Voltar</a></li>
-                <li><a href="">Consulta</a></li>
             </ul>
         </div>
 
@@ -38,6 +37,20 @@
                         <td>Unidade de Medida:</td>
                         <td>{{ $produto->unidade_id }}</td>
                     </tr>
+                    @foreach ($produto_detalhe as $produto_detalhes)
+                        <tr>
+                            <td>Comprimento:</td>
+                            <td>{{ $produto_detalhes->comprimento }}</td>
+                        </tr>
+                            <tr>
+                                <td>Altura:</td>
+                                <td>{{ $produto_detalhes->altura }}</td>
+                            </tr>
+                        <tr>
+                            <td>Largura:</td>
+                            <td>{{ $produto_detalhes->largura }}</td>
+                        </tr>
+                    @endforeach
                 </table>
             </div>
         </div>

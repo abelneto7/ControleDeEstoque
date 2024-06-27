@@ -58,18 +58,10 @@
                     </tbody>
                 </table>
 
-                {{ $clientes->appends($request)->links() }}
-                <!--<br>
-                {{ $clientes->count() }} - Total de registros por pagina
-                <br>
-                {{ $clientes->total() }} - Total de registros da consulta
-                <br>
-                {{ $clientes->firstItem() }} - Numero do primeiro registro da pagina
-                <br>
-                {{ $clientes->lastItem() }} - Numero do ultimo registro da pagina-->
-                <br>
+                @include('app.cliente.pagination.pagination', ['clientes' => $clientes ])
 
-                Exibindo {{ $clientes->count() }} clientes de {{ $clientes->total() }} (de {{ $clientes->firstItem() }} a {{ $clientes->lastItem() }})
+                <br>
+                Exibindo {{ $clientes->count() }} clientes de {{ $clientes->total() }}(de {{ $clientes->firstItem() }} a {{ $clientes->lastItem() }})
             </div>
         </div>
     </div>

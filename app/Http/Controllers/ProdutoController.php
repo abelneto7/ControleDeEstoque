@@ -76,7 +76,9 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto)
     {
-        return view('app.produto.show', ['produto' => $produto]);
+        $produto_detalhe = ProdutoDetalhe::all();
+
+        return view('app.produto.show', ['produto' => $produto, 'produto_detalhe' => $produto_detalhe]);
     }
 
     /**

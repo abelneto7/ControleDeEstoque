@@ -32,7 +32,7 @@
                     @foreach($pedidos as $pedido)
                         <tr>
                             <td>{{ $pedido->id }}</td>
-                            <td>{{ $pedido->cliente_id }}</td>
+                            <td>{{ $pedido->cliente->nome }}</td>
                             <td><a href="{{ route('pedido-produto.create', ['pedido' => $pedido->id]) }}">Adicionar Produtos</a></td>
 
                             <td><a href="{{ route('pedido.show', ['pedido' => $pedido->id]) }}">Visualizar</a></td>
@@ -50,18 +50,10 @@
                     </tbody>
                 </table>
 
-                {{ $pedidos->appends($request)->links() }}
-                <!--<br>
-                {{ $pedidos->count() }} - Total de registros por pagina
-                <br>
-                {{ $pedidos->total() }} - Total de registros da consulta
-                <br>
-                {{ $pedidos->firstItem() }} - Numero do primeiro registro da pagina
-                <br>
-                {{ $pedidos->lastItem() }} - Numero do ultimo registro da pagina-->
-                <br>
+                @include('app.pedido.pagination.pagination', ['pedidos' => $pedidos ])
 
-                Exibindo {{ $pedidos->count() }} pedidos de {{ $pedidos->total() }} (de {{ $pedidos->firstItem() }} a {{ $pedidos->lastItem() }})
+                <br>
+                Exibindo {{ $pedidos->count() }} pedidos de {{ $pedidos->total() }}(de {{ $pedidos->firstItem() }} a {{ $pedidos->lastItem() }})
             </div>
         </div>
     </div>

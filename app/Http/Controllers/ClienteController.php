@@ -14,16 +14,9 @@ class ClienteController extends Controller
      */
     public function index(Request $request)
     {
-        // Inicializa a consulta do Eloquent
-        $query = Cliente::query();
-
-        // Aplica filtro se existir valor para 'nome' no request
-        if ($request->filled('nome')) {
-            $query->where('nome', 'like', '%' . $request->input('nome') . '%');
-        }
-
-        // Obtém os clientes paginados
-        $clientes = $query->paginate(10);
+        $clientes = Cliente::where('nome', 'like', '%'.$request
+                ->input('nome').'%')
+                ->paginate(10);
 
         return view('app.cliente.index', ['clientes' => $clientes, 'request' => $request->all()]);
     }

@@ -4,9 +4,6 @@
         <title>Controle de Estoques - @yield('titulo')</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="{{ asset('css/estilo_basico.css') }}">
-
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
-
     </head>
 
     <body>

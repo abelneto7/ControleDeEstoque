@@ -10,6 +10,7 @@
         </div>
         <div class="menu">
             <ul>
+                <li><a href="{{ route('app.fornecedor.listar') }}">Listagem de fornecedores</a></li>
                 <li><a href="{{ route('app.fornecedor.adicionar') }}">Novo</a></li>
                 <li><a href="{{ route('app.fornecedor') }}">Consulta</a></li>
             </ul>
@@ -64,18 +65,10 @@
                     </tbody>
                 </table>
 
-                {{ $fornecedores->appends($request)->links() }}
-                <!--<br>
-                {{ $fornecedores->count() }} - Total de registros por pagina
-                <br>
-                {{ $fornecedores->total() }} - Total de registros da consulta
-                <br>
-                {{ $fornecedores->firstItem() }} - Numero do primeiro registro da pagina
-                <br>
-                {{ $fornecedores->lastItem() }} - Numero do ultimo registro da pagina-->
-                <br>
+                @include('app.fornecedor.pagination.pagination', ['fornecedores' => $fornecedores ])
 
-                Exibindo {{ $fornecedores->count() }} fornecedores de {{ $fornecedores->total() }} (de {{ $fornecedores->firstItem() }} a {{ $fornecedores->lastItem() }})
+                <br>
+                Exibindo {{ $fornecedores->count() }} fornecedores de {{ $fornecedores->total() }}(de {{ $fornecedores->firstItem() }} a {{ $fornecedores->lastItem() }})
             </div>
         </div>
     </div>
