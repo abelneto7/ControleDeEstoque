@@ -7,7 +7,14 @@
             <form method="post" action="{{ route('produto-detalhe.store') }}">
                 @csrf
                 @endif
-                <input type="text" value="{{ $produto_detalhe->produto_id ?? old('produto_id') }}" name="produto_id" placeholder="Id do Produto" class="borda-preta">
+                <select name="produto_id" class="borda-preta">
+                    <option value="">-- Selecione o Produto --</option>
+                    @foreach($produtos as $produto)
+                        <option value="{{ $produto->id }}" {{ (isset($produto_detalhe->produto_id) ? $produto_detalhe->produto_id : old('produto_id')) == $produto->id ? 'selected' : '' }}>
+                            {{ $produto->nome }}
+                        </option>
+                    @endforeach
+                </select>
                 {{ $errors->has('produto_id') ? $errors->first('produto_id') : '' }}
 
                 <input type="text" value="{{ $produto_detalhe->comprimento ?? old('comprimento') }}" name="comprimento" placeholder="Comprimento" class="borda-preta">

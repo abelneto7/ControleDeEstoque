@@ -11,7 +11,8 @@
             <li><a href="{{ route('pedido.index') }}">Pedidos</a></li>
             <li><a href="{{ route('app.fornecedor.listar') }}">Fornecedores</a></li>
             <li><a href="{{ route('cliente.index') }}">Clientes</a></li>
-            <li><a href="#">Unidades de Medidas</a></li>
+            <li><a href="{{ route('unidade.index') }}">Unidades de Medidas</a></li>
+            <li><a href="#">Entradas/Saídas</a></li>
             <li><a href="{{ route('app.sair') }}">Sair</a></li>
         </ul>
     </div>

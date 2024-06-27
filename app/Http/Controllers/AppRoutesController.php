@@ -35,6 +35,9 @@ class AppRoutesController extends Controller
                 Route::post('pedido-produto/store/{pedido}', 'PedidoProdutoController@store')->name('pedido-produto.store');
 
                 Route::delete('pedido-produto.destroy/{pedidoProduto}/{pedido_id}', 'PedidoProdutoController@destroy')->name('pedido-produto.destroy');
+
+                Route::resource('unidade', 'UnidadeController');
+
             });
     }
 }

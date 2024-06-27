@@ -16,6 +16,21 @@
         </div>
 
         <div class="informacao-pagina">
+
+            <div style="width: 30%; margin-left: auto; margin-right: auto;">
+                <form method="get" action="{{ route('produto.index') }}">
+                    @csrf
+
+                    <input type="text" value="{{ old('nome') }}" name="nome" placeholder="Nome do produto" class="borda-preta">
+                    <input type="text" value="{{ old('descricao') }}" name="descricao" placeholder="Descrição do produto" class="borda-preta">
+
+                    <button type="submit" class="borda-preta">Pesquisar</button>
+                    <a href="{{ route('produto.index') }}" style="text-decoration: none; margin-left: 10px;">
+                        <button type="button" class="borda-preta" style="background-color: silver;">Limpar</button>
+                    </a>
+                </form>
+            </div>
+
             <div style="width: 90%; margin-left: auto; margin-right: auto;">
                 {{ $produtos->total() }} Resultados
                 <table border="1" width="100%">

@@ -15,6 +15,22 @@
         </div>
 
         <div class="informacao-pagina">
+            <div style="width: 30%; margin-left: auto; margin-right: auto;">
+                <form action="{{ route('pedido.index') }}" method="GET">
+                    <select name="cliente_id" class="borda-preta">
+                        <option value="">Selecione um Cliente</option>
+                        @foreach ($pedidos as $pedido)
+                            <option value="{{ $pedido->cliente_id }}">{{ $pedido->cliente->nome }}</option>
+                        @endforeach
+                    </select>
+
+                    <button type="submit" class="borda-preta">Pesquisar</button>
+                    <a href="{{ route('pedido.index') }}" style="text-decoration: none; margin-left: 10px;">
+                        <button type="button" class="borda-preta" style="background-color: silver;">Limpar</button>
+                    </a>
+                </form>
+            </div>
+
             <div style="width: 90%; margin-left: auto; margin-right: auto;">
                 {{ $pedidos->total() }} Resultados
                 <table border="1" width="100%">

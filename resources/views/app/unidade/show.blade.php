@@ -1,16 +1,16 @@
 @extends('app.layouts.basico')
 
-@section('titulo', 'Cliente')
+@section('titulo', 'Unidade')
 
 @section('conteudo')
 
     <div class="conteudo-pagina">
         <div class="titulo-pagina-2">
-            <p>Visualizar Cliente</p>
+            <p>Visualizar Unidade</p>
         </div>
         <div class="menu">
             <ul>
-                <li><a href="{{ route('cliente.index') }}">Voltar</a></li>
+                <li><a href="{{ route('unidade.index') }}">Voltar</a></li>
             </ul>
         </div>
 
@@ -19,11 +19,15 @@
                 <table border="1" style="text-align: left">
                     <tr>
                         <td>ID:</td>
-                        <td>{{ $cliente->id }}</td>
+                        <td>{{ $unidade->id }}</td>
                     </tr>
                     <tr>
-                        <td>Nome:</td>
-                        <td>{{ $cliente->nome }}</td>
+                        <td>Unidade:</td>
+                        <td>{{ $unidade->unidade }}</td>
+                    </tr>
+                    <tr>
+                        <td>Descricao:</td>
+                        <td>{{ $unidade->descricao }}</td>
                     </tr>
                 </table>
             </div>

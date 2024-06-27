@@ -18,7 +18,12 @@ class ProdutoController extends Controller
      */
     public function index(Request $request)
     {
-        $produtos = Item::with(['itemDetalhe', 'fornecedor'])->paginate(10);
+        $produtos = Item::with(['itemDetalhe', 'fornecedor'])
+            ->where('nome', 'like', '%'.$request
+                    ->input('nome').'%')
+            ->where('descricao', 'like', '%'.$request
+                    ->input('descricao').'%')
+            ->paginate(10);
 
         return view('app.produto.index', ['produtos' => $produtos, 'request' => $request->all()]);
     }

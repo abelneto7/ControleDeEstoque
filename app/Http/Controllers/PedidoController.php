@@ -15,7 +15,9 @@ class PedidoController extends Controller
      */
     public function index(Request $request)
     {
-        $pedidos = Pedido::paginate(10);
+        $pedidos = Pedido::where('cliente_id', 'like', '%'.$request
+                ->input('cliente_id').'%')
+            ->paginate(10);
 
         return view('app.pedido.index', ['pedidos' => $pedidos, 'request' => $request->all()]);
     }

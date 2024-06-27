@@ -28,7 +28,9 @@ class ProdutoDetalheController extends Controller
     public function create()
     {
         $unidades = Unidade::all();
-        return view('app.produto_detalhe.create', ['unidades' => $unidades]);
+        $produtos = Produto::all(); // Obtenha todos os produtos
+
+        return view('app.produto_detalhe.create', ['unidades' => $unidades, 'produtos' => $produtos]);
     }
 
     /**
@@ -39,8 +41,29 @@ class ProdutoDetalheController extends Controller
      */
     public function store(Request $request)
     {
+        $regras = [
+            'produto_id' => 'unique:produto_detalhes|exists:produtos,id',
+            'comprimento' => 'required|numeric',
+            'largura' => 'required|numeric',
+            'altura' => 'required|numeric',
+            'unidade_id' => 'exists:unidades,id'
+        ];
+
+        $feedback = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'comprimento.numeric' => 'O campo comprimento deve ser um número',
+            'altura.numeric' => 'O campo altura deve ser um número',
+            'largura.numeric' => 'O campo largura deve ser um número',
+            'produto_id.exists' => 'O produto informado não existe',
+            'produto_id.unique' => 'Já existe detalhes cadastrados a esse produto.',
+            'unidade_id.exists' => 'A unidade de medida informada não existe'
+        ];
+
+        $request->validate($regras, $feedback);
+
         ProdutoDetalhe::create($request->all());
-        echo 'Cadastro realizado com sucesso!';
+
+        return redirect()->route('produto.index');
     }
 
     /**
@@ -64,7 +87,9 @@ class ProdutoDetalheController extends Controller
     {
         $produtoDetalhe = ItemDetalhe::with(['item'])->find($id);
         $unidades = Unidade::all();
-        return view('app.produto_detalhe.edit', ['produto_detalhe' => $produtoDetalhe, 'unidades' => $unidades]);
+        $produtos = Produto::all();
+
+        return view('app.produto_detalhe.edit', ['produto_detalhe' => $produtoDetalhe, 'unidades' => $unidades, 'produtos' => $produtos]);
     }
 
     /**
