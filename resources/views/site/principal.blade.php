@@ -8,8 +8,8 @@
 
             <div class="esquerda">
                 <div class="informacoes">
-                    <h1 class="texto-preto">Sistema Super Gestão</h1>
-                    <p>Software para gestão empresarial ideal para sua empresa.<p>
+                    <h1 class="texto-preto">Sistema Controle de Estoque</h1>
+                    <p>Software para gestão de estoque ideal para sua empresa.<p>
                     <div class="chamada">
                         <img src="{{ asset('img/check.png') }}">
                         <span class="texto-branco">Gestão completa e descomplicada</span>
