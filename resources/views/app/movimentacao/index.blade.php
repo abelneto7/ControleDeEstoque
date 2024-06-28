@@ -11,6 +11,8 @@
         <div class="menu">
             <ul>
                 <li><a href="{{ route('movimentacao.create') }}">Novo</a></li>
+                <li><a href="{{ route('movimentacao.export') }}">XLSX</a></li>
+                <li><a href="{{ route('movimentacao.exportPDF') }}">PDF</a></li>
             </ul>
         </div>
 

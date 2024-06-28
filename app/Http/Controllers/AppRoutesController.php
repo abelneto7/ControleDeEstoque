@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ProdutoController;
 
 class AppRoutesController extends Controller
 {
@@ -40,6 +41,21 @@ class AppRoutesController extends Controller
 
                 Route::resource('movimentacao', 'MovimentacaoController');
 
+                Route::get('/export-users', 'ExportController@exportacao');
+                Route::get('/export-produtos', 'ExportController@exportacao_produtos')->name('produto.export');
+                Route::get('/export-clientes', 'ExportController@exportacao_clientes')->name('cliente.export');
+                Route::get('/export-fornecedores', 'ExportController@exportacao_fornecedores')->name('fornecedor.export');
+                Route::get('/export-movimentacoes', 'ExportController@exportacao_movimentacoes')->name('movimentacao.export');
+                Route::get('/export-pedidos', 'ExportController@exportacao_pedidos')->name('pedido.export');
+                Route::get('/export-unidades', 'ExportController@exportacao_unidades')->name('unidade.export');
+
+                Route::get('/exportPDF-users', 'ExportPDFController@exportacao');
+                Route::get('/exportPDF-produtos', 'ExportPDFController@exportacao_produtos')->name('produto.exportPDF');
+                Route::get('/exportPDF-clientes', 'ExportPDFController@exportacao_clientes')->name('cliente.exportPDF');
+                Route::get('/exportPDF-fornecedores', 'ExportPDFController@exportacao_fornecedores')->name('fornecedor.exportPDF');
+                Route::get('/exportPDF-movimentacoes', 'ExportPDFController@exportacao_movimentacoes')->name('movimentacao.exportPDF');
+                Route::get('/exportPDF-pedidos', 'ExportPDFController@exportacao_pedidos')->name('pedido.exportPDF');
+                Route::get('/exportPDF-unidades', 'ExportPDFController@exportacao_unidades')->name('unidade.exportPDF');
             });
     }
 }

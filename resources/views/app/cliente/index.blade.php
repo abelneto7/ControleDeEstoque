@@ -11,6 +11,8 @@
         <div class="menu">
             <ul>
                 <li><a href="{{ route('cliente.create') }}">Novo</a></li>
+                <li><a href="{{ route('cliente.export') }}">XLSX</a></li>
+                <li><a href="{{ route('cliente.exportPDF') }}">PDF</a></li>
             </ul>
         </div>
 
