@@ -19,13 +19,13 @@ class ExportPDFController extends Controller
 {
     public function exportacao_produtos()
     {
-        $ItemDetalhe = ItemDetalhe::all();
+        $itemDetalhe = ItemDetalhe::all();
         $produto_detalhe = ProdutoDetalhe::all();
         $unidades = Unidade::all();
         $fornecedores = Fornecedor::all();
         $produtos = Produto::all();
 
-        $pdf = PDF::loadView('app.produto.pdf', ['produtos' => $produtos, 'unidades' => $unidades, 'fornecedores', $fornecedores, 'produto_detalhe' => $produto_detalhe, 'ItemDetalhe' => $ItemDetalhe]);
+        $pdf = PDF::loadView('app.produto.pdf', ['produtos' => $produtos, 'unidades' => $unidades, 'fornecedores', $fornecedores, 'produto_detalhe' => $produto_detalhe]);
 
         return $pdf->download('lista_de_podutos.pdf');    }
 

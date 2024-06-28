@@ -7,23 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     protected $table = 'produtos';
-    protected $fillable = ['nome', 'descricao', 'peso', 'unidade_id', 'fornecedor_id'];
+    protected $fillable = ['nome',
+        'descricao',
+        'peso',
+        'unidade_id',
+        'fornecedor_id'
+    ];
 
     public function itemDetalhe()
     {
         return $this->hasOne('App\ItemDetalhe', 'produto_id', 'id');
     }
+
     public function fornecedor()
     {
-        return $this->belongsTo('App\Fornecedor');
+        return $this->belongsTo('App\Fornecedor', 'fornecedor_id');
     }
 
     public function pedidos()
     {
         return $this->belongsToMany('App\Pedido', 'pedidos_produtos', 'produto_id', 'pedido_id');
-        /*
-         * 3 - Representa o nome da fk da tabela mapeada pelo model na tabela de relacionamento
-         * 4 - representa o nome da k da tabela mapeada pelo model utilizada no relacionamento que estamos utilizando
-         * */
     }
 }

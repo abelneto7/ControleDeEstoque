@@ -21,7 +21,7 @@
             <div style="width: 30%; margin-left: auto; margin-right: auto;">
                 <form method="get" action="{{ route('cliente.index') }}">
                     @csrf
-                    <input type="text" value="{{ old('nome') }}" name="nome" placeholder="Nome" class="borda-preta">
+                    <input type="text" value="{{ Request::input('nome') }}" name="nome" placeholder="Nome" class="borda-preta">
                     <button type="submit" class="borda-preta">Pesquisar</button>
                         <a href="{{ route('cliente.index') }}" style="text-decoration: none; margin-left: 10px;">
                             <button type="button" class="borda-preta" style="background-color: silver;">Limpar</button>

@@ -23,9 +23,9 @@
             <td>{{ $produto->fornecedor->site ?? ''}}</td>
             <td>{{ $produto->peso }}</td>
             <td>{{ $produto->unidade_id }}</td>
-            <td>{{ $produto->itemDetalhe->comprimento ?? '' }}</td>
-            <td>{{ $produto->itemDetalhe->altura ?? '' }}</td>
-            <td>{{ $produto->itemDetalhe->largura ?? '' }}</td>
+            <td>{{ $produto->produtoDetalhe->comprimento ?? '' }}</td>
+            <td>{{ $produto->produtoDetalhe->altura ?? '' }}</td>
+            <td>{{ $produto->produtoDetalhe->largura ?? '' }}</td>
         </tr>
     @endforeach
     </tbody>

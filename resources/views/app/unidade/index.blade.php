@@ -21,8 +21,8 @@
             <div style="width: 30%; margin-left: auto; margin-right: auto;">
                 <form method="get" action="{{ route('unidade.index') }}">
                     @csrf
-                    <input type="text" name="unidade" placeholder="Unidade" class="borda-preta">
-                    <input type="text" name="descricao" placeholder="Descricao" class="borda-preta">
+                    <input type="text" value="{{ Request::input('unidade') }}" name="unidade" placeholder="Unidade" class="borda-preta">
+                    <input type="text" value="{{ Request::input('descricao') }}" name="descricao" placeholder="Descricao" class="borda-preta">
 
                     <button type="submit" class="borda-preta">Pesquisar</button>
                     <a href="{{ route('unidade.index') }}" style="text-decoration: none; margin-left: 10px;">

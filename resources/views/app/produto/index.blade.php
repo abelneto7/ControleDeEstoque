@@ -23,8 +23,8 @@
                 <form method="get" action="{{ route('produto.index') }}">
                     @csrf
 
-                    <input type="text" value="{{ old('nome') }}" name="nome" placeholder="Nome do produto" class="borda-preta">
-                    <input type="text" value="{{ old('descricao') }}" name="descricao" placeholder="Descrição do produto" class="borda-preta">
+                    <input type="text" value="{{ Request::input('nome') }}" name="nome" placeholder="Nome do produto" class="borda-preta">
+                    <input type="text" value="{{ Request::input('descricao') }}" name="descricao" placeholder="Descrição do produto" class="borda-preta">
 
                     <button type="submit" class="borda-preta">Pesquisar</button>
                     <a href="{{ route('produto.index') }}" style="text-decoration: none; margin-left: 10px;">

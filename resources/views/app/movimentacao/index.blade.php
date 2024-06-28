@@ -30,7 +30,7 @@
                         @endforeach
                     </select>
 
-                    <input type="number" name="quantidade" placeholder="Quantidade" class="borda-preta">
+                    <input type="number" value="{{ Request::input('quantidade') }}" name="quantidade" placeholder="Quantidade" class="borda-preta">
 
                     <select name="tipo_movimentacao" class="borda-preta">
                         <option value="">Selecione o Tipo de Movimentação</option>
