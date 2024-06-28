@@ -38,6 +38,8 @@ class AppRoutesController extends Controller
 
                 Route::resource('unidade', 'UnidadeController');
 
+                Route::resource('movimentacao', 'MovimentacaoController');
+
             });
     }
 }
