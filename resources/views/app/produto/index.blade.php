@@ -13,7 +13,7 @@
                 <li><a href="{{ route('produto.create') }}">Novo</a></li>
                 <li><a href="{{ route('produto-detalhe.create') }}">Adicionar detalhes</a></li>
                 <li><a href="{{ route('produto.export') }}">XLSX</a></li>
-                <li><a href="{{ route('produto.exportPDF') }}">PDF</a></li>
+                <li><a href="{{ route('produto.exportPDF') }}" target="_blank">PDF</a></li>
             </ul>
         </div>
 

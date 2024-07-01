@@ -25,50 +25,81 @@ class ExportPDFController extends Controller
         $fornecedores = Fornecedor::all();
         $produtos = Produto::all();
 
-        $pdf = PDF::loadView('app.produto.pdf', ['produtos' => $produtos, 'unidades' => $unidades, 'fornecedores', $fornecedores, 'produto_detalhe' => $produto_detalhe]);
+        $pdf = PDF::loadView('app.produto.pdf', [
+            'produtos' => $produtos,
+            'unidades' => $unidades,
+            'fornecedores' => $fornecedores,
+            'produto_detalhe' => $produto_detalhe
+        ]);
 
-        return $pdf->download('lista_de_podutos.pdf');    }
+        $pdf->setPaper('a4', 'landscape');
+
+        return $pdf->stream('lista_de_podutos.pdf');    }
 
     public function exportacao_clientes()
     {
         $clientes = Cliente::all();
 
-        $pdf = PDF::loadView('app.cliente.pdf', ['clientes' => $clientes]);
+        $pdf = PDF::loadView('app.cliente.pdf', [
+            'clientes' => $clientes
+        ]);
 
-        return $pdf->download('lista_de_clientes.pdf');
+        $pdf->setPaper('a4', 'landscape');
+        //tipo de papel: a4, letter
+        //orientação: landscape (paisagem), portrait (retrato)
+
+        return $pdf->stream('lista_de_clientes.pdf');
     }
 
     public function exportacao_fornecedores()
     {
         $fornecedores = Fornecedor::all();
 
-        $pdf = PDF::loadView('app.fornecedor.pdf', ['fornecedores' => $fornecedores]);
+        $pdf = PDF::loadView('app.fornecedor.pdf', [
+            'fornecedores' => $fornecedores
+        ]);
 
-        return $pdf->download('lista_de_fornecedores.pdf');    }
+        $pdf->setPaper('a4', 'landscape');
+
+        return $pdf->stream('lista_de_fornecedores.pdf');    }
 
     public function exportacao_movimentacoes()
     {
         $movimentacoes = Movimentacao::all();
         $produtos = Produto::all();
 
-        $pdf = PDF::loadView('app.movimentacao.pdf', ['movimentacoes' => $movimentacoes, 'produtos' => $produtos]);
+        $pdf = PDF::loadView('app.movimentacao.pdf', [
+            'movimentacoes' => $movimentacoes,
+            'produtos' => $produtos
+        ]);
 
-        return $pdf->download('lista_de_movimentacoes.pdf');    }
+        $pdf->setPaper('a4', 'landscape');
+
+        return $pdf->stream('lista_de_movimentacoes.pdf');    }
 
     public function exportacao_pedidos()
     {
         $clientes = Cliente::all();
         $pedidos = Pedido::all();
 
-        $pdf = PDF::loadView('app.pedido.pdf', ['pedidos' => $pedidos, 'clientes' => $clientes]);
+        $pdf = PDF::loadView('app.pedido.pdf', [
+            'pedidos' => $pedidos,
+            'clientes' => $clientes
+        ]);
 
-        return $pdf->download('lista_de_pedidos.pdf');    }
+        $pdf->setPaper('a4', 'landscape');
+
+        return $pdf->stream('lista_de_pedidos.pdf');    }
 
     public function exportacao_unidades()
     {
         $unidades = Unidade::all();
 
-        $pdf = PDF::loadView('app.unidade.pdf', ['unidades' => $unidades]);
+        $pdf = PDF::loadView('app.unidade.pdf', [
+            'unidades' => $unidades
+        ]);
 
-        return $pdf->download('lista_de_unidades.pdf');    }
+        $pdf->setPaper('a4', 'landscape');
+
+        return $pdf->stream('lista_de_unidades.pdf');    }
 }

@@ -12,7 +12,7 @@
             <ul>
                 <li><a href="{{ route('unidade.create') }}">Novo</a></li>
                 <li><a href="{{ route('unidade.export') }}">XLSX</a></li>
-                <li><a href="{{ route('unidade.exportPDF') }}">PDF</a></li>
+                <li><a href="{{ route('unidade.exportPDF') }}" target="_blank">PDF</a></li>
             </ul>
         </div>
 

@@ -13,7 +13,7 @@
                 <li><a href="{{ route('app.fornecedor.adicionar') }}">Novo</a></li>
                 <li><a href="{{ route('app.fornecedor') }}">Consulta</a></li>
                 <li><a href="{{ route('fornecedor.export') }}">XLSX</a></li>
-                <li><a href="{{ route('fornecedor.exportPDF') }}">PDF</a></li>
+                <li><a href="{{ route('fornecedor.exportPDF') }}" target="_blank">PDF</a></li>
             </ul>
         </div>
 

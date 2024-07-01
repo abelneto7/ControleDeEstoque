@@ -12,7 +12,7 @@
             <ul>
                 <li><a href="{{ route('pedido.create') }}">Novo</a></li>
                 <li><a href="{{ route('pedido.export') }}">XLSX</a></li>
-                <li><a href="{{ route('pedido.exportPDF') }}">PDF</a></li>
+                <li><a href="{{ route('pedido.exportPDF') }}" target="_blank">PDF</a></li>
             </ul>
         </div>
 
