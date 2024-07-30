@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePedidoFormRequest;
+use App\Http\Requests\UpdatePedidoFormRequest;
 use App\Pedido;
 use App\Cliente;
 use Illuminate\Http\Request;
@@ -39,24 +41,18 @@ class PedidoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+    public function store(CreatePedidoFormRequest $request)
     {
-        $regras = [
-            'cliente_id' => 'exists:clientes,id'
-        ];
-
-        $feedback = [
-            'cliente_id.exists' => 'O cliente informado não existe'
-        ];
-
-        $request->validate($regras, $feedback);
+        $validated = $request->validated();
 
         $pedido = new Pedido();
-        $pedido->cliente_id = $request->get('cliente_id');
+        $pedido->cliente_id = $validated['cliente_id'];
         $pedido->save();
 
         return redirect()->route('pedido.index');
     }
+
 
     /**
      * Display the specified resource.
@@ -89,19 +85,9 @@ class PedidoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Pedido $pedido, Request $request)
+    public function update(Pedido $pedido, UpdatePedidoFormRequest $request)
     {
-        $regras = [
-            'cliente_id' => 'exists:clientes,id'
-        ];
-
-        $feedback = [
-            'cliente_id.exists' => 'O cliente informado não existe'
-        ];
-
-        $request->validate($regras, $feedback);
-
-        $pedido->update($request->all());
+        $pedido->update($request->validated());
 
         return redirect()->route('pedido.index');
     }

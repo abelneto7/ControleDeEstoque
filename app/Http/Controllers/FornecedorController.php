@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Fornecedor;
 
+use App\Http\Requests\StoreFornecedorFormRequest;
+use App\Http\Requests\UpdateFornecedorFormRequest;
 use Illuminate\Http\Request;
 
 class FornecedorController extends Controller
@@ -21,52 +23,22 @@ class FornecedorController extends Controller
         return view('app.fornecedor.listar', ['fornecedores' => $fornecedores, 'request' => $request->all()]);
     }
 
-    public function adicionar (Request $request) {
-        $msg = '';
-        //inclusão
-        if($request->input('_token') != '' && $request->input('id') == '') {
-            //validacao
-            $regras = [
-                'nome' => 'required|min:3|max:40',
-                'site' => 'required',
-                'uf' => 'required|min:2|max:3',
-                'email'=> 'email'
-	        ];
+    public function adicionar(StoreFornecedorFormRequest $request)
+    {
+        $validated = $request->validated();
 
-            $feedback = [
-                'required' => 'O campo :attribute deve ser preenchido',
-                'nome.min' => 'O campo nome deve ter no mínimo 3 caracteres',
-                'nome.max' => 'O campo nome deve ter no máximo 40 caracteres',
-                'uf.min' => 'O campo uf deve ter no mínimo 2 caracteres',
-                'uf.max' => 'O campo uf deve ter no máximo 2 caracteres',
-                'email.email' => 'O campo email não foi preenchido corretamente'
-            ];
-            $request->validate($regras, $feedback);
-            $fornecedor = new Fornecedor();
-            $fornecedor->create($request->all());
-            $msg = 'Cadastro realizado com sucesso';
-        }
-        //edição
-        if($request->input('_token') != '' && $request->input('id') != '') {
-            $fornecedor = Fornecedor::find($request->input('id'));
-            $update = $fornecedor->update($request->all());
+        Fornecedor::create($validated);
 
-            if($update){
-                $msg = 'Update realizado';
-            }else{
-                $msg = 'Update não realizado';
-            }
-            return redirect()->route('app.fornecedor.editar', ['id' => $request->input('id'), 'msg' => $msg]);
-        }
-
-        return view('app.fornecedor.adicionar', ['msg' => $msg]);
+        return view('app.fornecedor.adicionar');
     }
 
-    public function editar($id, $msg = '')
+    public function editar(UpdateFornecedorFormRequest $request, $msg = '')
     {
-        $fornecedor = Fornecedor::find($id);
+        $validated = $request->validated();
+        $fornecedor = Fornecedor::find($request->input('id'));
+        $fornecedor->update($validated);
 
-        return view('app.fornecedor.adicionar', ['fornecedor' => $fornecedor, 'msg' => $msg]);
+        return redirect()->route('app.fornecedor.editar', ['id' => $request->input('id'), 'msg' => $msg]);
     }
 
     public function excluir($id)

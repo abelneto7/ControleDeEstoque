@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PedidoProdutoFormRequest;
 use App\Pedido;
 use App\PedidoProduto;
 use App\Produto;
@@ -37,19 +38,9 @@ class PedidoProdutoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Pedido $pedido)
+    public function store(PedidoProdutoFormRequest $request, Pedido $pedido)
     {
-        $regras = [
-            'produto_id' => 'exists:produtos,id',
-            'quantidade' => 'required'
-        ];
-
-        $feedback = [
-            'produto_id.exists' => 'O produto informado não existe',
-            'required' => 'O campo :attribute é obrigatório.'
-        ];
-
-        $request->validate($regras, $feedback);
+        $validated = $request->validated();
 /*
         $pedidoProduto = new PedidoProduto();
         $pedidoProduto->pedido_id = $pedido->id;
@@ -65,7 +56,7 @@ class PedidoProdutoController extends Controller
         ); //objeto
         */
         $pedido->produtos()->attach([
-            $request->get('produto_id') => ['quantidade' => $request->get('quantidade')]
+            $validated['produto_id'] => ['quantidade' => $validated['quantidade']]
         ]);
 
         return redirect()->route('pedido-produto.create', ['pedido' => $pedido->id]);

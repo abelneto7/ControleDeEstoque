@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUnidadeFormRequest;
+use App\Http\Requests\UpdateUnidadeFormRequest;
 use Illuminate\Http\Request;
 use App\Unidade;
 
@@ -39,24 +41,13 @@ class UnidadeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUnidadeFormRequest $request)
     {
-        $regras = [
-            'unidade' => 'required|min:1|max:4',
-            'descricao' => 'required',
-        ];
-
-        $feedback = [
-            'required' => 'O campo :attribute deve ser preenchido',
-            'unidade.min' => 'O campo unidade deve ter no mínimo 1 caracteres',
-            'unidade.max' => 'O campo unidade deve ter no máximo 4 caracteres',
-        ];
-
-        $request->validate($regras, $feedback);
+        $validated = $request->validated();
 
         $unidade = new Unidade();
-        $unidade->unidade = $request->get('unidade');
-        $unidade->descricao = $request->get('descricao');
+        $unidade->unidade = $validated['unidade'];
+        $unidade->descricao = $validated['descricao'];
         $unidade->save();
 
         return redirect()->route('unidade.index');
@@ -91,22 +82,9 @@ class UnidadeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Unidade $unidade)
+    public function update(UpdateUnidadeFormRequest $request, Unidade $unidade)
     {
-        $regras = [
-            'unidade' => 'required|min:1|max:4',
-            'descricao' => 'required',
-        ];
-
-        $feedback = [
-            'required' => 'O campo :attribute deve ser preenchido',
-            'unidade.min' => 'O campo unidade deve ter no mínimo 1 caracteres',
-            'unidade.max' => 'O campo unidade deve ter no máximo 4 caracteres',
-        ];
-
-        $request->validate($regras, $feedback);
-
-        $unidade->update($request->all());
+        $unidade->update($request->validated());
 
         return redirect()->route('unidade.show', ['unidade' => $unidade->id]);
     }

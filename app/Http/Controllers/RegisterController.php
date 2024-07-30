@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterFormRequest;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
@@ -13,32 +14,15 @@ class RegisterController extends Controller
     {
         return view('site.register', ['titulo' => 'Cadastro']);
     }
-    public function salvar(Request $request)
+    public function salvar(RegisterFormRequest $request)
     {
-        // Regras de validação
-        $regras = [
-            'nome' => 'required',
-            'usuario' => 'required|email|unique:users,email',
-            'senha' => 'required|min:4|max:50'
-        ];
-
-        // Mensagens de feedback
-        $feedback = [
-            'required' => 'O campo :attribute é obrigatório!',
-            'usuario.email' => 'O campo usuario deve ser um e-mail válido!',
-            'usuario.unique' => 'O e-mail informado já está em uso!',
-            'senha.min' => 'A senha deve ter no mínimo 4 caracteres',
-            'senha.max' => 'A senha deve ter no máximo 50 caracteres'
-        ];
-
-        // Validação
-        $request->validate($regras, $feedback);
+        $validated = $request->validated();
 
         // Criar um novo usuário
         $user = new User();
-        $user->name = $request->input('nome');
-        $user->email = $request->input('usuario');
-        $user->password = Hash::make($request->input('senha'));
+        $user->name = $validated['nome'];
+        $user->email = $validated['usuario'];
+        $user->password = Hash::make($validated['senha']);
         $user->save();
 
         // Redirecionar com mensagem de sucesso

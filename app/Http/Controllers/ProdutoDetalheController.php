@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateProdutoDetalheFormRequest;
 use App\Produto;
 use App\ProdutoDetalhe;
 use App\Unidade;
@@ -41,27 +42,7 @@ class ProdutoDetalheController extends Controller
      */
     public function store(Request $request)
     {
-        $regras = [
-            'produto_id' => 'unique:produto_detalhes|exists:produtos,id',
-            'comprimento' => 'required|numeric',
-            'largura' => 'required|numeric',
-            'altura' => 'required|numeric',
-            'unidade_id' => 'exists:unidades,id'
-        ];
-
-        $feedback = [
-            'required' => 'O campo :attribute deve ser preenchido',
-            'comprimento.numeric' => 'O campo comprimento deve ser um número',
-            'altura.numeric' => 'O campo altura deve ser um número',
-            'largura.numeric' => 'O campo largura deve ser um número',
-            'produto_id.exists' => 'O produto informado não existe',
-            'produto_id.unique' => 'Já existe detalhes cadastrados a esse produto.',
-            'unidade_id.exists' => 'A unidade de medida informada não existe'
-        ];
-
-        $request->validate($regras, $feedback);
-
-        ProdutoDetalhe::create($request->all());
+        ProdutoDetalhe::create($request->validated());
 
         return redirect()->route('produto.index');
     }
@@ -99,9 +80,10 @@ class ProdutoDetalheController extends Controller
      * @param  App\ProdutoDetalhe $produtoDetalhe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProdutoDetalhe $produtoDetalhe)
+    public function update(UpdateProdutoDetalheFormRequest $request, ProdutoDetalhe $produtoDetalhe)
     {
-        $produtoDetalhe->update($request->all());
+        $produtoDetalhe->update($request->validated());
+
         echo 'Atualização realizada com sucesso!';
     }
 

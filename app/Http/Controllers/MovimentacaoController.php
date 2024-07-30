@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateMovimentacaoFormRequest;
+use App\Http\Requests\UpdateMovimentacaoFormRequest;
 use Illuminate\Http\Request;
 use App\Movimentacao;
 use App\Produto;
@@ -43,25 +45,11 @@ class MovimentacaoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateMovimentacaoFormRequest $request)
     {
         $produtos = Produto::all();
-        $regras = [
-            'produto_id' => 'required|exists:produtos,id',
-            'quantidade' => 'required|integer',
-            'tipo_movimentacao' => 'required|in:1,2'
-        ];
 
-        $feedback = [
-            'required' => 'O campo :attribute deve ser preenchido.',
-            'produto_id.exists' => 'Produto inexistente.',
-            'quantidade.integer' => 'O campo quantidade deve ser um número inteiro.',
-            'tipo_movimentacao.in' => 'Tipo de movimentação inválido. Escolha 1 para entrada ou 2 para saída.',
-        ];
-
-        $request->validate($regras, $feedback);
-
-        Movimentacao::create($request->all());
+        Movimentacao::create($request->validated());
 
         return redirect()->route('movimentacao.index', ['produtos' => $produtos]);
     }
@@ -97,26 +85,11 @@ class MovimentacaoController extends Controller
      * @param  \App\Movimentacao  $movimentacao
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Movimentacao $movimentacao)
+    public function update(UpdateMovimentacaoFormRequest $request, Movimentacao $movimentacao)
     {
         $produtos = Produto::all();
 
-        $regras = [
-            'produto_id' => 'required|exists:produtos,id',
-            'quantidade' => 'required|integer',
-            'tipo_movimentacao' => 'required|in:1,2'
-        ];
-
-        $feedback = [
-            'required' => 'O campo :attribute deve ser preenchido.',
-            'produto_id.exists' => 'Produto inexistente.',
-            'quantidade.integer' => 'O campo quantidade deve ser um número inteiro.',
-            'tipo_movimentacao.in' => 'Tipo de movimentação inválido. Escolha 1 para entrada ou 2 para saída.',
-        ];
-
-        $request->validate($regras, $feedback);
-
-        $movimentacao->update($request->all());
+        $movimentacao->update($request->validated());
 
         return redirect()->route('movimentacao.show', ['movimentacao' => $movimentacao->id, 'produtos' => $produtos]);
     }
